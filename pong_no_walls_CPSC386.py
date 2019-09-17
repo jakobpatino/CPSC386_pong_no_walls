@@ -285,34 +285,6 @@ while not victory:
     ball = pygame.draw.circle(windowSurface, WHITE, (curr_x, curr_y), 8)
 
     # bounces ball if it collides with paddles and plays bounce sound
-    '''if (ball.colliderect(player_right) and curr_x <= player_right.left) or\
-            (ball.colliderect(player_top) and curr_x <= player_top.left) or\
-            (ball.colliderect(player_bottom) and curr_x <= player_bottom.left) or \
-            (ball.colliderect(ai_top) and curr_x <= ai_top.left) or \
-            (ball.colliderect(ai_bottom) and curr_x <= ai_bottom.left):
-        curr_dir = bounce_side(curr_dir)
-        ball_bounce.play()
-    if (ball.colliderect(ai_left) and curr_x >= ai_left.right) or\
-            (ball.colliderect(ai_top) and curr_x >= ai_top.right) or\
-            (ball.colliderect(ai_bottom) and curr_x >= ai_bottom.right) or \
-            (ball.colliderect(player_top) and curr_x >= player_top.right) or \
-            (ball.colliderect(player_bottom) and curr_x >= player_bottom.right):
-        curr_dir = bounce_side(curr_dir)
-        ball_bounce.play()
-    if (ball.colliderect(player_top) and curr_y >= player_top.bottom) or\
-            (ball.colliderect(player_right) and curr_y >= player_right.bottom) or\
-            (ball.colliderect(ai_top) and curr_y >= ai_top.bottom) or \
-            (ball.colliderect(ai_left) and curr_y >= ai_left.bottom):
-        curr_dir = bounce_bottom(curr_dir)
-        ball_bounce.play()
-    if (ball.colliderect(player_bottom) and curr_y <= player_bottom.top) or\
-            (ball.colliderect(player_right) and curr_y <= player_right.top) or\
-            (ball.colliderect(ai_bottom) and curr_y <= ai_bottom.top) or \
-            (ball.colliderect(ai_left) and curr_y <= ai_left.top):
-        curr_dir = bounce_top(curr_dir)
-        ball_bounce.play()'''
-
-    ###
     if curr_dir == 'up_right' or curr_dir == 'down_right':
         if (ball.colliderect(player_right) and curr_x <= player_right.left) or \
                 (ball.colliderect(player_top) and curr_x <= player_top.left) or \
@@ -343,8 +315,6 @@ while not victory:
                 (ball.colliderect(ai_left) and curr_y <= ai_left.top):
             curr_dir = bounce_top(curr_dir)
             ball_bounce.play()
-
-    ###
 
     # sets up player movement
     if moveUp and player_right.top > 13\
