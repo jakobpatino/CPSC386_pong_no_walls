@@ -67,7 +67,7 @@ AISPEED = 3
 # set up initial ball stats
 ball_dir = ['up_right', 'up_left', 'down_right', 'down_left']
 curr_dir = ball_dir[random.randrange(0, 4)]
-curr_speed = random.randrange(7, 12)
+curr_speed = random.randrange(4, 9)
 curr_y = random.randrange(100, 450)
 curr_x = 400
 
@@ -225,7 +225,7 @@ while not victory:
             victory = True
             loss.play()
         curr_dir = ball_dir[random.randrange(0, 4)]
-        curr_speed = random.randrange(3, 7)
+        curr_speed = random.randrange(4, 9)
         curr_y = random.randrange(100, 450)
         curr_x = 400
 
@@ -245,7 +245,7 @@ while not victory:
             victory = True
             win.play()
         curr_dir = ball_dir[random.randrange(0, 4)]
-        curr_speed = random.randrange(3, 7)
+        curr_speed = random.randrange(4, 9)
         curr_y = random.randrange(100, 450)
         curr_x = 400
 
@@ -253,7 +253,7 @@ while not victory:
     if (curr_x > 400 and curr_y > 558) or curr_x > 808 or (curr_x > 400 and curr_y < -8):
         round_score_ai += 1
         curr_dir = ball_dir[random.randrange(0, 4)]
-        curr_speed = random.randrange(3, 7)
+        curr_speed = random.randrange(4, 9)
         curr_y = random.randrange(100, 450)
         curr_x = 400
         if not (round_score_ai > 11 and round_score_ai >= round_score_player + 2):
@@ -261,7 +261,7 @@ while not victory:
     if (curr_x <= 400 and curr_y > 558) or curr_x < -8 or (curr_x <= 400 and curr_y < -8):
         round_score_player += 1
         curr_dir = ball_dir[random.randrange(0, 4)]
-        curr_speed = random.randrange(3, 7)
+        curr_speed = random.randrange(4, 9)
         curr_y = random.randrange(100, 450)
         curr_x = 400
         if not (round_score_player > 11 and round_score_player >= round_score_ai + 2):
@@ -285,7 +285,7 @@ while not victory:
     ball = pygame.draw.circle(windowSurface, WHITE, (curr_x, curr_y), 8)
 
     # bounces ball if it collides with paddles and plays bounce sound
-    if (ball.colliderect(player_right) and curr_x <= player_right.left) or\
+    '''if (ball.colliderect(player_right) and curr_x <= player_right.left) or\
             (ball.colliderect(player_top) and curr_x <= player_top.left) or\
             (ball.colliderect(player_bottom) and curr_x <= player_bottom.left) or \
             (ball.colliderect(ai_top) and curr_x <= ai_top.left) or \
@@ -310,7 +310,41 @@ while not victory:
             (ball.colliderect(ai_bottom) and curr_y <= ai_bottom.top) or \
             (ball.colliderect(ai_left) and curr_y <= ai_left.top):
         curr_dir = bounce_top(curr_dir)
-        ball_bounce.play()
+        ball_bounce.play()'''
+
+    ###
+    if curr_dir == 'up_right' or curr_dir == 'down_right':
+        if (ball.colliderect(player_right) and curr_x <= player_right.left) or \
+                (ball.colliderect(player_top) and curr_x <= player_top.left) or \
+                (ball.colliderect(player_bottom) and curr_x <= player_bottom.left) or \
+                (ball.colliderect(ai_top) and curr_x <= ai_top.left) or \
+                (ball.colliderect(ai_bottom) and curr_x <= ai_bottom.left):
+            curr_dir = bounce_side(curr_dir)
+            ball_bounce.play()
+    if curr_dir == 'up_left' or curr_dir == 'down_left':
+        if (ball.colliderect(ai_left) and curr_x >= ai_left.right) or \
+                (ball.colliderect(ai_top) and curr_x >= ai_top.right) or \
+                (ball.colliderect(ai_bottom) and curr_x >= ai_bottom.right) or \
+                (ball.colliderect(player_top) and curr_x >= player_top.right) or \
+                (ball.colliderect(player_bottom) and curr_x >= player_bottom.right):
+            curr_dir = bounce_side(curr_dir)
+            ball_bounce.play()
+    if curr_dir == 'up_left' or curr_dir == 'up_right':
+        if (ball.colliderect(player_top) and curr_y >= player_top.bottom) or \
+                (ball.colliderect(player_right) and curr_y >= player_right.bottom) or \
+                (ball.colliderect(ai_top) and curr_y >= ai_top.bottom) or \
+                (ball.colliderect(ai_left) and curr_y >= ai_left.bottom):
+            curr_dir = bounce_bottom(curr_dir)
+            ball_bounce.play()
+    if curr_dir == 'down_left' or curr_dir == 'down_right':
+        if (ball.colliderect(player_bottom) and curr_y <= player_bottom.top) or \
+                (ball.colliderect(player_right) and curr_y <= player_right.top) or \
+                (ball.colliderect(ai_bottom) and curr_y <= ai_bottom.top) or \
+                (ball.colliderect(ai_left) and curr_y <= ai_left.top):
+            curr_dir = bounce_top(curr_dir)
+            ball_bounce.play()
+
+    ###
 
     # sets up player movement
     if moveUp and player_right.top > 13\
@@ -377,7 +411,7 @@ while not victory:
         ai_bottom.left = 80
 
         curr_dir = ball_dir[random.randrange(0, 4)]
-        curr_speed = random.randrange(3, 6)
+        curr_speed = random.randrange(4, 9)
         curr_y = random.randrange(100, 450)
         curr_x = 400
 
